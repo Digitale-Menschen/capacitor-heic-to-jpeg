@@ -5,7 +5,7 @@ A simple plugin which converts heic to jpeg images.
 ## Install
 
 ```bash
-npm install capacitor-heic-to-jpeg
+npm install @digitalemenschen/capacitor-heic-to-jpeg
 npx cap sync
 ```
 

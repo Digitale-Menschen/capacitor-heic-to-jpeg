@@ -1,3 +1,3 @@
 export interface CapacitorHeicToJpegPlugin {
-  echo(options: { value: string }): Promise<{ value: string }>;
+  convertToJpeg(options: { path: string }): Promise<{ path: string }>;
 }

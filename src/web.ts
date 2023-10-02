@@ -4,10 +4,9 @@ import type { CapacitorHeicToJpegPlugin } from './definitions';
 
 export class CapacitorHeicToJpegWeb
   extends WebPlugin
-  implements CapacitorHeicToJpegPlugin
-{
-  async echo(options: { value: string }): Promise<{ value: string }> {
-    console.log('ECHO', options);
+  implements CapacitorHeicToJpegPlugin {
+  async convertToJpeg(options: { path: string }): Promise<{ path: string }> {
+    console.log('convertToJpeg is not available on web', options);
     return options;
   }
 }

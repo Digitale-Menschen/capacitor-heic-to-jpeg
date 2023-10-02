@@ -1,5 +1,5 @@
 {
-  "name": "capacitor-heic-to-jpeg",
+  "name": "@digitalemenschen/capacitor-heic-to-jpeg",
   "version": "1.0.0",
   "description": "A simple plugin which converts heic to jpeg images.",
   "main": "dist/plugin.cjs.js",
@@ -41,7 +41,8 @@
     "build": "npm run clean && npm run docgen && tsc && rollup -c rollup.config.js",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "publish": "npm publish --access public"
   },
   "devDependencies": {
     "@capacitor/android": "^5.0.0",

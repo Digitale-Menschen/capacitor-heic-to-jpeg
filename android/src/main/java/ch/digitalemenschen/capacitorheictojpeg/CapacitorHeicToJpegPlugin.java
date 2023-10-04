@@ -33,6 +33,8 @@ public class CapacitorHeicToJpegPlugin extends Plugin {
     @PluginMethod
     public void convertToJpeg(PluginCall call) {
         String uriString = call.getString("path");
+
+        // Throw if no path was provided.
         if (uriString == null) {
             call.reject("Must provide a URI path");
             return;
@@ -40,6 +42,7 @@ public class CapacitorHeicToJpegPlugin extends Plugin {
 
         Bitmap bitmap;
         Uri uri = Uri.parse(uriString);
+
         if (uriString.startsWith("content://")) {
             // Handle content URIs
             try {
@@ -50,11 +53,12 @@ public class CapacitorHeicToJpegPlugin extends Plugin {
                 return;
             }
         } else {
-            // Handle file paths
+            // Handle absolut file paths
             BitmapFactory.Options options = new BitmapFactory.Options();
             bitmap = BitmapFactory.decodeFile(uriString, options);
         }
 
+        // Throw if image could not be loaded for some reason.
         if (bitmap == null) {
             call.reject("Failed to decode bitmap");
             return;
@@ -68,7 +72,6 @@ public class CapacitorHeicToJpegPlugin extends Plugin {
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         }
 
-        // Convert and save the bitmap as JPEG
         // Convert and save the bitmap as JPEG in the cache directory with a random filename
         String fileName = "converted_" + System.currentTimeMillis() + ".jpg";
         String jpegPath = new File(getContext().getCacheDir(), fileName).getAbsolutePath();
@@ -78,20 +81,21 @@ public class CapacitorHeicToJpegPlugin extends Plugin {
             out.flush();
             out.close();
             if (uriString.startsWith("content://")) {
+                // Create new file.
                 File outputFile = new File(jpegPath);
 
                 // Get content URI
                 Uri contentUri = androidx.core.content.FileProvider.getUriForFile(
-                        getContext(),
-                        getContext().getPackageName() + ".fileprovider",
-                        outputFile
+                    getContext(),
+                    getContext().getPackageName() + ".fileprovider",
+                    outputFile
                 );
 
                 // Grant temporary read permission to the content URI for the calling app
                 getContext().grantUriPermission(
-                        getContext().getPackageName(),
-                        contentUri,
-                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    getContext().getPackageName(),
+                    contentUri,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION
                 );
 
                 // Return the content URI
@@ -99,6 +103,7 @@ public class CapacitorHeicToJpegPlugin extends Plugin {
                 ret.put("path", contentUri.toString());
                 call.resolve(ret);
             } else {
+                // For absolute paths just return.
                 JSObject ret = new JSObject();
                 ret.put("path", jpegPath);
                 call.resolve(ret);

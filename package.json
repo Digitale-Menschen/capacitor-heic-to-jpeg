@@ -1,6 +1,6 @@
 {
   "name": "@digitalemenschen/capacitor-heic-to-jpeg",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A simple plugin which converts heic to jpeg images.",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",

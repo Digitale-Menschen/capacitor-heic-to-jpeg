@@ -32,13 +32,7 @@ npx cap sync
 ### convertToJpeg(...)
 
 ```typescript
-convertToJpeg(options
-:
-{
-  path: string;
-}
-) =>
-Promise<{ path: string; }>
+convertToJpeg(options: { path: string; }) => Promise<{ path: string; }>
 ```
 
 Provide the path (either an absolute path or an Android content URI) pointing to the HEIC/HEIF image you'd like to

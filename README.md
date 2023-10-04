@@ -35,11 +35,11 @@ npx cap sync
 convertToJpeg(options: { path: string; }) => Promise<{ path: string; }>
 ```
 
-Provide the path (either an absolute path or an Android content URI) pointing to the HEIC/HEIF image you'd like to
-convert.
+Provide the path (either an absolute path or an Android content URI) pointing to the HEIC/HEIF image you'd like to convert.
+If you provide an Android content URI, the plugin will also return an Android content URI in exchange.
 
 | Param         | Type                           |
-|---------------|--------------------------------|
+| ------------- | ------------------------------ |
 | **`options`** | <code>{ path: string; }</code> |
 
 **Returns:** <code>Promise&lt;{ path: string; }&gt;</code>
